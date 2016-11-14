@@ -8,8 +8,7 @@ try:
 except ImportError:
     from urllib import urlencode
 
-from giftrocket.version import __version__
-
+__version__ = '1.0.0'
 
 ALLOWED_METHODS = {'delete', 'get', 'patch', 'post', 'put'}
 
@@ -19,8 +18,9 @@ def _requests(url, method, data):
 
     normalized_method = method.lower()
     if normalized_method in ALLOWED_METHODS:
-        return getattr(requests, normalized_method)(url, data=data, headers={
-            'User-Agent': 'GiftRocket Python v{}'.format(__version__)
+        return getattr(requests, normalized_method)(url, data=json.dumps(data), headers={
+            'User-Agent': 'GiftRocket Python v{}'.format(__version__),
+            'Content-type': 'application/json', 'Accept': 'text/plain'
         })
     else:
         raise ValueError(

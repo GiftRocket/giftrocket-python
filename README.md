@@ -16,9 +16,8 @@ All API requests require an access token.  A sandbox access token is assigned up
 ### Authentication
 
 ```python
-client = GiftRocket("[YOUR_ACCESS_TOKEN]");
+client = GiftRocket("[YOUR_ACCESS_TOKEN]")
 ```
-
 
 ### Orders
 
@@ -40,17 +39,17 @@ response = client.create_order({
       "style_id": "thank_you_tree"
     }
   ]
-});
+})
 
 if response.ok:
     order = response.to_json()["order"]
 
 
 # Return historical orders, optionally passing a starting offset for results.
-response = client.get_orders({offset: 10});
+response = client.get_orders({offset: 10})
 
 # Return a order by order_id
-response = client.get_order("[ORDER_ID]");
+response = client.get_order("[ORDER_ID]")
 ```
 
 ### Funding Sources
@@ -58,23 +57,23 @@ Production funding sources must be added through the web dashboard. A sandbox fu
 
 ```python
 # Retrieve a list of your funding sources (credit card, ach, etc).
-response = client.get_funding_sources();
+response = client.get_funding_sources()
 ```
 
 ### Styles
 A style defines the presentation of your gift.  The styles endpoint returns an array of card designs.
 
 ```python
-response = client.get_styles();
+response = client.get_styles()
 ```
 
 ### Gifts
 Retrieve a single or many historical gifts sent by your account.
 
 ```python
-response = client.get_gifts({offset: 10});
+response = client.get_gifts({offset: 10})
 
-response = client.get_gift("[GIFT_ID]");
+response = client.get_gift("[GIFT_ID]")
 ```
 
 [1]: https://giftrocket.com/docs
