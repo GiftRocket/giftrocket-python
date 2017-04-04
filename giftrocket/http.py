@@ -10,7 +10,7 @@ try:
 except ImportError:
     from urllib import urlencode
 
-__version__ = '1.0.0'
+__version__ = '2.0.0'
 
 ALLOWED_METHODS = {'delete', 'get', 'patch', 'post', 'put'}
 
