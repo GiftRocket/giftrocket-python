@@ -1,15 +1,35 @@
 from http import to_requests
 
 class GiftRocket(object):
-    base_url = 'https://www.giftrocket.com/api/v1/'
 
-    def __init__(self, access_token):
+    def __init__(self, access_token, domain="https://www.giftrocket.com"):
         if not access_token:
             raise Exception("Access token required for GiftRocket API")
 
-        self.requests = to_requests(self.base_url, {
+        self.requests = to_requests('{}/api/v1/'.format(domain), {
             "access_token": access_token
         })
+
+    # Organizations
+    def create_organization(self, data):
+        return self.requests("organizations", "POST", data)
+
+    def get_organizations(self):
+        return self.requests("organizations", "GET")
+
+    # Organization Members
+    def create_organization_member(self, organization_id, data):
+        return self.requests(
+            "organizations/{}/members".format(organization_id),
+            "POST",
+            data
+        )
+
+    def get_organization_members(self, organization_id):
+        return self.requests(
+            "organizations/{}/members".format(organization_id),
+            "GET"
+        )
 
     # Orders
     def create_order(self, data):
@@ -29,9 +49,9 @@ class GiftRocket(object):
         return self.requests("gifts/{}".format(gift_id), "GET")
 
     # Styles
-    def get_styles(self):
-        return self.requests("gifts", "GET")
+    def get_styles(self, data=None):
+        return self.requests("styles", "GET", data or {})
 
     # Funding Sources
-    def get_funding_sources(self):
-        return self.requests("funding_sources", "GET")
+    def get_funding_sources(self, data=None):
+        return self.requests("funding_sources", "GET", data or {})

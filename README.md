@@ -16,7 +16,13 @@ All API requests require an access token.  A sandbox access token is assigned up
 ### Authentication
 
 ```python
-client = GiftRocket("[YOUR_ACCESS_TOKEN]")
+from giftrocket import GiftRocket
+
+# Sandbox environment
+client = GiftRocket("[SANDBOX_ACCESS_TOKEN]", "https://testflight.giftrocket.com")
+
+# Production environment
+client = GiftRocket("[PRODUCTION_ACCESS_TOKEN]", "https://www.giftrocket.com")
 ```
 
 ### Orders
@@ -36,7 +42,7 @@ response = client.create_order({
         "email": "person@yourteam.com",
         "name": "Person Example"
       },
-      "style_id": "thank_you_tree"
+      "style_id": "[STYLE_ID]"
     }
   ]
 })
